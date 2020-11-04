@@ -14,8 +14,8 @@ function Grasshopper(color, posX, posY) {
   this.show = function () {
     this.html.classList.add("grasshopper");
     this.html.classList.add(`g-${this.color}`);
-    this.html.style.top = this.posY+"px";
-    this.html.style.left = this.posX+"px";
+    this.html.style.top = `${this.posY}px`;
+    this.html.style.left = `${this.posX}px`;
 
     var grasshopperSound = new Audio('./sounds/aparicion.saltamontes.mp3');
     grasshopperSound.play();
@@ -116,18 +116,31 @@ function Game() {
       var newGrasshopper = new Grasshopper(getRandomColor(), x, y);
       var divGrasshopper = newGrasshopper.show();
       wrapperGrasshopper.appendChild(divGrasshopper);
-    
-      setTimeout(function() {
+      
+      
+
+      if (counter.innerHTML <= 5) {
+        setTimeout(function() {
         divGrasshopper.remove();
       }, 3000);
-    }, 1000);
+      } else if ( counter.innerHTML > 5 && counter.innerHTML <= 10) {
+        setTimeout(function() {
+          divGrasshopper.remove();
+        }, 2000);
+      } else {
+        setTimeout(function() {
+          divGrasshopper.remove();
+        }, 1500);
+      } 
+    }, 500);
     
     var chamaleonHTLM = document.getElementsByClassName('chamaleon')[0];
     var newChamaleon = new Chamaleon(getRandomColor(), chamaleonHTLM);
     
+    
     this.chamaleonInterval = setInterval(function() {
       newChamaleon.changeColor(getRandomColor());
-    }, 2000);
+      }, 3000);
     
     var counter = document.getElementById('counter') ;
     counter.innerHTML = 0;
